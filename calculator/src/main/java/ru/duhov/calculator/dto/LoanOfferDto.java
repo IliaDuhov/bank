@@ -2,12 +2,14 @@ package ru.duhov.calculator.dto;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
+@Builder
 public class LoanOfferDto {
 
     @NotNull
@@ -20,7 +22,7 @@ public class LoanOfferDto {
     private BigDecimal totalAmount;
 
     @NotNull
-    private Integer trem;
+    private Integer term;
 
     @NotNull
     private BigDecimal monthlyPayment;
@@ -28,7 +30,9 @@ public class LoanOfferDto {
     @NotNull
     private BigDecimal rate;
 
+    @NotNull
     private Boolean isInsuranceEnabled;
 
+    @NotNull
     private Boolean isSalaryClient;
 }

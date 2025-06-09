@@ -5,6 +5,7 @@ import ru.duhov.calculator.dto.enums.Status;
 
 import java.time.LocalDateTime;
 
+//TODO is it necessary here?
 public class StatementStatusHistoryDto {
 
     private Status status;

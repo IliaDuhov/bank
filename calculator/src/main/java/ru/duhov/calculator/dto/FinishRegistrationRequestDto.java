@@ -5,6 +5,7 @@ import ru.duhov.calculator.dto.enums.MaritalStatus;
 
 import java.time.LocalDate;
 
+//TODO is it necessary here?
 public class FinishRegistrationRequestDto {
 
     private Gender gender;
