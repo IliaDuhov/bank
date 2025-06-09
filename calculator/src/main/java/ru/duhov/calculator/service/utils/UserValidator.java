@@ -19,6 +19,7 @@ import java.time.Period;
 public class UserValidator {
 
     public void validate(ScoringDataDto scoringData, CreditDto creditDto){
+        log.debug("Validating scoring data {}", scoringData);
         checkEmploymentStatus(scoringData, creditDto);
         checkEmploymentPosition(scoringData, creditDto);
         checkAmount(scoringData);
@@ -26,9 +27,11 @@ public class UserValidator {
         checkAge(scoringData);
         checkGender(scoringData, creditDto);
         checkWorkExperience(scoringData);
+        log.debug("scoring data validated{}", scoringData);
     }
 
     private void checkEmploymentStatus(ScoringDataDto scoringDataDto, CreditDto creditDto){
+        log.debug("Validating employment status scoring data {}", scoringDataDto);
         EmploymentStatus status = scoringDataDto.getEmployment().getEmploymentStatus();
 
         if(status == EmploymentStatus.UNEMPLOYED){
@@ -40,9 +43,11 @@ public class UserValidator {
         if (status == EmploymentStatus.BUSINESS_OWNER){
             creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(1)));
         }
+        log.debug("Employment status validated {}", scoringDataDto);
     }
 
     private void checkEmploymentPosition(ScoringDataDto scoringDataDto, CreditDto creditDto){
+        log.debug("Employment position validating scoring data, {}", scoringDataDto);
         Position position = scoringDataDto.getEmployment().getPosition();
 
         if(position == Position.MANAGER){
@@ -51,15 +56,18 @@ public class UserValidator {
         if(position == Position.TOP_MANAGER){
             creditDto.setRate(creditDto.getRate().subtract(BigDecimal.valueOf(3)));
         }
+        log.debug("Employment position validated {}", scoringDataDto);
     }
 
     private void checkAmount(ScoringDataDto scoringDataDto){
+        log.debug("Validating loan amount scoring data, {}", scoringDataDto);
         if (scoringDataDto.getAmount().compareTo(scoringDataDto.getEmployment().getSalary().multiply(new BigDecimal("24"))) > 0) {
             throw new CreditRefusedException("Loan amount must not be greater than 24 times the salary.");
         }
     }
 
     private void checkMaritalStatus(ScoringDataDto scoringDataDto, CreditDto creditDto){
+        log.debug("Employment marital status validating scoring data, {}", scoringDataDto);
         MaritalStatus maritalStatus = scoringDataDto.getMaritalStatus();
 
         if(maritalStatus == MaritalStatus.MARRIED){
@@ -68,9 +76,11 @@ public class UserValidator {
         if(maritalStatus == MaritalStatus.DIVORCED){
             creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(3)));
         }
+        log.debug("Employment marital status validated {}", scoringDataDto);
     }
 
     private void checkAge(ScoringDataDto scoringDataDto){
+        log.debug("Validating age scoring data, {}", scoringDataDto);
         int age = Period.between(scoringDataDto.getBirthdate(), LocalDate.now()).getYears();
         if (age < 20 || age > 65) {
             throw new CreditRefusedException("Age must be between 20 and 65 years old.");
@@ -78,6 +88,7 @@ public class UserValidator {
     }
 
     private void checkGender(ScoringDataDto scoringDataDto, CreditDto creditDto){
+        log.debug("Validating gender scoring data, {}", scoringDataDto);
         int age = Period.between(scoringDataDto.getBirthdate(), LocalDate.now()).getYears();
         Gender gender = scoringDataDto.getGender();
         if(gender == Gender.FEMALE && (age >= 32 && age <= 60)){
@@ -92,6 +103,7 @@ public class UserValidator {
     }
 
     private void checkWorkExperience(ScoringDataDto scoringDataDto){
+        log.debug("Validating work experience scoring data, {}", scoringDataDto);
         if(scoringDataDto.getEmployment().getWorkExperienceTotal() < 18 ){
             throw new CreditRefusedException("Work experience in total must me more than 18 months");
         }

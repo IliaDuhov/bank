@@ -1,6 +1,7 @@
 package ru.duhov.calculator.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.duhov.calculator.dto.CreditDto;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CalcCreditServiceImpl implements CalcCreditService {
 
     @Value("${base.rate}")
@@ -27,11 +29,12 @@ public class CalcCreditServiceImpl implements CalcCreditService {
 
     @Override
     public CreditDto calcCredit(ScoringDataDto scoringData) {
+        log.debug("Calculating credit {}", scoringData);
         return createCredit(scoringData);
     }
 
     private CreditDto createCredit(ScoringDataDto scoringData) {
-
+        log.debug("Creating credit {}", scoringData);
         CreditDto creditDto = CreditDto.builder()
                 .amount(scoringData.getAmount())
                 .rate(BASE_RATE)
@@ -40,6 +43,7 @@ public class CalcCreditServiceImpl implements CalcCreditService {
                 .isInsuranceEnabled(scoringData.getIsInsuranceEnabled())
                 .build();
 
+        log.debug("Validating scoring data {}", scoringData);
         userValidator.validate(scoringData, creditDto);
 
         BigDecimal resultRate = loanCalculator.adjustRate(creditDto.getRate(), creditDto.getIsInsuranceEnabled(), creditDto.getIsSalaryClient());
@@ -50,13 +54,15 @@ public class CalcCreditServiceImpl implements CalcCreditService {
         creditDto.setAmount(principal);
         creditDto.setMonthlyPayment(monthlyPayment);
         creditDto.setRate(resultRate);
-        creditDto.setPsk(totalAmount);
+        creditDto.setPsk(calculatePSK(creditDto.getAmount(), totalAmount, creditDto.getTerm()));
         creditDto.setPaymentSchedule(calculatePaymentSchedule(creditDto));
+        log.debug("Credit dto created {}", creditDto);
         return creditDto;
+
+
     }
 
     private List<PaymentScheduleElementDto> calculatePaymentSchedule(CreditDto creditDto) {
-
         List<PaymentScheduleElementDto> paymentSchedule = new ArrayList<>();
         LocalDate startDate = LocalDate.now();
         BigDecimal remainingDebt = creditDto.getAmount();
@@ -101,5 +107,19 @@ public class CalcCreditServiceImpl implements CalcCreditService {
 
     private BigDecimal calculateRemainingDebt(BigDecimal remainingDebt, BigDecimal debtPayment) {
         return remainingDebt.subtract(debtPayment).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal calculatePSK(BigDecimal totalAmount, BigDecimal amount, int term) {
+        if (amount.compareTo(BigDecimal.ZERO) == 0 || term == 0) {
+            return BigDecimal.ZERO;
+        }
+        BigDecimal overpayment = totalAmount.subtract(amount);
+        BigDecimal years = BigDecimal.valueOf(term)
+                .divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
+        return overpayment
+                .divide(amount, 10, RoundingMode.HALF_UP)
+                .divide(years, 10, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(100))
+                .setScale(2, RoundingMode.HALF_UP);
     }
 }

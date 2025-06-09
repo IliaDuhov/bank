@@ -1,6 +1,7 @@
 package ru.duhov.calculator.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.duhov.calculator.dto.LoanOfferDto;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CalcLoanOfferServiceImpl implements CalcLoanOfferService {
 
     private final LoanCalculatorComponent loanCalculator;
@@ -25,6 +27,7 @@ public class CalcLoanOfferServiceImpl implements CalcLoanOfferService {
 
     @Override
     public List<LoanOfferDto> calcLoanOffers(LoanStatementRequestDto loanStatementRequest) {
+        log.debug("Calculating loan offers {}", loanStatementRequest);
         List<LoanOfferDto> offers = new ArrayList<>();
         offers.add(createLoanOffer(loanStatementRequest, false, false));
         offers.add(createLoanOffer(loanStatementRequest, false, true));
@@ -36,7 +39,7 @@ public class CalcLoanOfferServiceImpl implements CalcLoanOfferService {
 
     private LoanOfferDto createLoanOffer(LoanStatementRequestDto loanStatementRequest, Boolean isInsuranceEnabled,
                                          Boolean isSalaryClient){
-
+        log.debug("Creating loan offers {}", loanStatementRequest);
         BigDecimal loanAmount = loanStatementRequest.getAmount();
         BigDecimal rate = loanCalculator.adjustRate(BASE_RATE, isInsuranceEnabled, isSalaryClient);
         BigDecimal principal = loanCalculator.calculatePrincipal(loanAmount, isInsuranceEnabled);
