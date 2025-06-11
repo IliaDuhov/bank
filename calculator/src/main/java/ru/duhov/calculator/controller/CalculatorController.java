@@ -22,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/calculator")
+//TODO refactor swagger
 public class CalculatorController {
 
     private final CalcLoanOfferServiceImpl calcLoanOfferService;
