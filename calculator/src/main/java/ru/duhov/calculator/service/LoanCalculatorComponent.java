@@ -41,7 +41,7 @@ public class LoanCalculatorComponent {
 
     public BigDecimal calculatePrincipal(BigDecimal amount, boolean isInsuranceEnabled) {
         if(isInsuranceEnabled){
-            amount.add(INSURANCE_COST);
+            return amount.add(INSURANCE_COST);
         }
         return amount;
     }

@@ -2,7 +2,10 @@ package ru.duhov.calculator.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.duhov.calculator.dto.enums.Gender;
 import ru.duhov.calculator.dto.enums.MaritalStatus;
 
@@ -10,6 +13,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ScoringDataDto {
 
     @NotNull

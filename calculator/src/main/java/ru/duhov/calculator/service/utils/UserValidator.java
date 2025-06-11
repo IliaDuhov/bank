@@ -74,7 +74,7 @@ public class UserValidator {
             creditDto.setRate(creditDto.getRate().subtract(BigDecimal.valueOf(3)));
         }
         if(maritalStatus == MaritalStatus.DIVORCED){
-            creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(3)));
+            creditDto.setRate(creditDto.getRate().add(BigDecimal.valueOf(1)));
         }
         log.debug("Employment marital status validated {}", scoringDataDto);
     }
@@ -105,10 +105,10 @@ public class UserValidator {
     private void checkWorkExperience(ScoringDataDto scoringDataDto){
         log.debug("Validating work experience scoring data, {}", scoringDataDto);
         if(scoringDataDto.getEmployment().getWorkExperienceTotal() < 18 ){
-            throw new CreditRefusedException("Work experience in total must me more than 18 months");
+            throw new CreditRefusedException("Work experience in total must me more than 18 months.");
         }
         if(scoringDataDto.getEmployment().getWorkExperienceCurrent() < 3){
-            throw new CreditRefusedException("Current work experience must me more than 3 months");
+            throw new CreditRefusedException("Current work experience must me more than 3 months.");
         }
     }
 }
