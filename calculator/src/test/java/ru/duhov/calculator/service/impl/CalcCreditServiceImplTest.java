@@ -15,7 +15,6 @@ import ru.duhov.calculator.dto.enums.EmploymentStatus;
 import ru.duhov.calculator.dto.enums.Gender;
 import ru.duhov.calculator.dto.enums.MaritalStatus;
 import ru.duhov.calculator.dto.enums.Position;
-import ru.duhov.calculator.service.CalcCreditService;
 import ru.duhov.calculator.service.LoanCalculatorComponent;
 import ru.duhov.calculator.service.utils.UserValidator;
 
@@ -45,7 +44,6 @@ class CalcCreditServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
 
         scoringData.setAmount(new BigDecimal(100000));
         scoringData.setTerm(18);
