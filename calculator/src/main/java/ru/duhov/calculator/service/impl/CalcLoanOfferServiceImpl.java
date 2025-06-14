@@ -34,19 +34,31 @@ public class CalcLoanOfferServiceImpl implements CalcLoanOfferService {
         offers.add(createLoanOffer(loanStatementRequest, true, false));
         offers.add(createLoanOffer(loanStatementRequest, true, true));
         offers.sort(Comparator.comparing(LoanOfferDto::getRate).reversed());
+        log.debug("Calculated list of loan offers {}", offers);
         return offers;
     }
 
     private LoanOfferDto createLoanOffer(LoanStatementRequestDto loanStatementRequest, Boolean isInsuranceEnabled,
                                          Boolean isSalaryClient){
-        log.debug("Creating loan offers {}", loanStatementRequest);
-        BigDecimal loanAmount = loanStatementRequest.getAmount();
-        BigDecimal rate = loanCalculator.adjustRate(BASE_RATE, isInsuranceEnabled, isSalaryClient);
-        BigDecimal principal = loanCalculator.calculatePrincipal(loanAmount, isInsuranceEnabled);
-        BigDecimal monthlyPayment = loanCalculator.calculateAnnuityMonthlyPayment(principal, rate, loanStatementRequest.getTerm());
-        BigDecimal totalAmount = loanCalculator.calculateTotalAmount(monthlyPayment, loanStatementRequest.getTerm());
+        log.debug("Creating loan offer: loanStatementRequest={}, isInsuranceEnabled={}, isSalaryClient={}",
+                loanStatementRequest, isInsuranceEnabled, isSalaryClient);
 
-        return LoanOfferDto.builder()
+        BigDecimal loanAmount = loanStatementRequest.getAmount();
+        log.debug("Setting loanAmount: {}", loanAmount);
+
+        BigDecimal rate = loanCalculator.adjustRate(BASE_RATE, isInsuranceEnabled, isSalaryClient);
+        log.debug("Calculated rate: {}", rate);
+
+        BigDecimal principal = loanCalculator.calculatePrincipal(loanAmount, isInsuranceEnabled);
+        log.debug("Calculated principal: {}", principal);
+
+        BigDecimal monthlyPayment = loanCalculator.calculateAnnuityMonthlyPayment(principal, rate, loanStatementRequest.getTerm());
+        log.debug("Calculated monthly payment: {}", monthlyPayment);
+
+        BigDecimal totalAmount = loanCalculator.calculateTotalAmount(monthlyPayment, loanStatementRequest.getTerm());
+        log.debug("Calculated totalAmount: {}", totalAmount);
+
+        LoanOfferDto loanOffer = LoanOfferDto.builder()
                 .statementId(UUID.randomUUID())
                 .term(loanStatementRequest.getTerm())
                 .requestedAmount(loanAmount)
@@ -56,5 +68,8 @@ public class CalcLoanOfferServiceImpl implements CalcLoanOfferService {
                 .isSalaryClient(isSalaryClient)
                 .isInsuranceEnabled(isInsuranceEnabled)
                 .build();
+
+        log.debug("Calculated loan offer: {}", loanOffer);
+        return loanOffer;
     }
 }

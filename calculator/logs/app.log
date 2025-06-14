@@ -1,0 +1,87 @@
+2025-06-14 20:19:20 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2025-06-14 20:19:20 INFO  [main] r.d.calculator.CalculatorApplication - Starting CalculatorApplication using Java 21.0.7 with PID 12056 (C:\Users\adm\Desktop\gitRepos\bank\calculator\target\classes started by adm in C:\Users\adm\Desktop\gitRepos\bank\calculator)
+2025-06-14 20:19:20 DEBUG [main] r.d.calculator.CalculatorApplication - Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-06-14 20:19:20 INFO  [main] r.d.calculator.CalculatorApplication - No active profile set, falling back to 1 default profile: "default"
+2025-06-14 20:19:21 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-06-14 20:19:21 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2025-06-14 20:19:21 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-14 20:19:21 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-06-14 20:19:22 INFO  [main] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-06-14 20:19:22 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1657 ms
+2025-06-14 20:19:22 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2025-06-14 20:19:22 INFO  [main] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-06-14 20:19:22 INFO  [main] r.d.calculator.CalculatorApplication - Started CalculatorApplication in 2.965 seconds (process running for 3.36)
+2025-06-14 20:19:26 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-14 20:19:26 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-06-14 20:19:26 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-06-14 20:19:27 INFO  [http-nio-8080-exec-4] o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 677 ms
+2025-06-14 20:19:30 INFO  [http-nio-8080-exec-5] r.d.c.c.CalculatorController - Received loan offers request: LoanStatementRequestDto(amount=25000, term=8, firstName=Coul, lastName=Rust, middleName=Jackson, email=coul@example.com, birthdate=2003-01-01, passportSeries=1234, passportNumber=567890)
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculating loan offers LoanStatementRequestDto(amount=25000, term=8, firstName=Coul, lastName=Rust, middleName=Jackson, email=coul@example.com, birthdate=2003-01-01, passportSeries=1234, passportNumber=567890)
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Creating loan offer: loanStatementRequest=LoanStatementRequestDto(amount=25000, term=8, firstName=Coul, lastName=Rust, middleName=Jackson, email=coul@example.com, birthdate=2003-01-01, passportSeries=1234, passportNumber=567890), isInsuranceEnabled=false, isSalaryClient=false
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Setting loanAmount: 25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Adjusting rate depending on settings: isInsuranceEnabled=false,  isSalaryClient=false
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated rate: rate=20
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated rate: 20
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating principal: amount=25000, isInsuranceEnabled=false
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated amount: amount=25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated principal: 25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating annuity monthly payment: loanAmount=25000, rate=20, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated monthly payment: 3363.89
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated monthly payment: 3363.89
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating total amount: monthlyPayment=3363.89, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated total amount: totalAmount=26911.12
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated totalAmount: 26911.12
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated loan offer: LoanOfferDto(statementId=c15ec84b-6d79-4a1d-8062-fa1c96433853, requestedAmount=25000, totalAmount=26911.12, term=8, monthlyPayment=3363.89, rate=20, isInsuranceEnabled=false, isSalaryClient=false)
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Creating loan offer: loanStatementRequest=LoanStatementRequestDto(amount=25000, term=8, firstName=Coul, lastName=Rust, middleName=Jackson, email=coul@example.com, birthdate=2003-01-01, passportSeries=1234, passportNumber=567890), isInsuranceEnabled=false, isSalaryClient=true
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Setting loanAmount: 25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Adjusting rate depending on settings: isInsuranceEnabled=false,  isSalaryClient=true
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating  rate by SALARY_CLIENT_DISCOUNT: rate=19
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated rate: rate=19
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated rate: 19
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating principal: amount=25000, isInsuranceEnabled=false
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated amount: amount=25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated principal: 25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating annuity monthly payment: loanAmount=25000, rate=19, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated monthly payment: 3351.74
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated monthly payment: 3351.74
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating total amount: monthlyPayment=3351.74, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated total amount: totalAmount=26813.92
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated totalAmount: 26813.92
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated loan offer: LoanOfferDto(statementId=aeeddd69-9fa9-47c5-96c4-d3d30f9e9030, requestedAmount=25000, totalAmount=26813.92, term=8, monthlyPayment=3351.74, rate=19, isInsuranceEnabled=false, isSalaryClient=true)
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Creating loan offer: loanStatementRequest=LoanStatementRequestDto(amount=25000, term=8, firstName=Coul, lastName=Rust, middleName=Jackson, email=coul@example.com, birthdate=2003-01-01, passportSeries=1234, passportNumber=567890), isInsuranceEnabled=true, isSalaryClient=false
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Setting loanAmount: 25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Adjusting rate depending on settings: isInsuranceEnabled=true,  isSalaryClient=false
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating  rate by INSURANCE_DISCOUNT: rate=17
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated rate: rate=17
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated rate: 17
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating principal: amount=25000, isInsuranceEnabled=true
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Increased amount: amount=125000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated principal: 125000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating annuity monthly payment: loanAmount=125000, rate=17, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated monthly payment: 16637.44
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated monthly payment: 16637.44
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating total amount: monthlyPayment=16637.44, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated total amount: totalAmount=133099.52
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated totalAmount: 133099.52
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated loan offer: LoanOfferDto(statementId=8ef15840-f4ec-4c41-b054-dc5ab3277ee6, requestedAmount=25000, totalAmount=133099.52, term=8, monthlyPayment=16637.44, rate=17, isInsuranceEnabled=true, isSalaryClient=false)
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Creating loan offer: loanStatementRequest=LoanStatementRequestDto(amount=25000, term=8, firstName=Coul, lastName=Rust, middleName=Jackson, email=coul@example.com, birthdate=2003-01-01, passportSeries=1234, passportNumber=567890), isInsuranceEnabled=true, isSalaryClient=true
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Setting loanAmount: 25000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Adjusting rate depending on settings: isInsuranceEnabled=true,  isSalaryClient=true
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating  rate by INSURANCE_DISCOUNT: rate=17
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating  rate by SALARY_CLIENT_DISCOUNT: rate=16
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated rate: rate=16
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated rate: 16
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating principal: amount=25000, isInsuranceEnabled=true
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Increased amount: amount=125000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated principal: 125000
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating annuity monthly payment: loanAmount=125000, rate=16, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated monthly payment: 16576.98
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated monthly payment: 16576.98
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculating total amount: monthlyPayment=16576.98, term=8
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.LoanCalculatorComponent - Calculated total amount: totalAmount=132615.84
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated totalAmount: 132615.84
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated loan offer: LoanOfferDto(statementId=495d6bf8-9926-4e0a-8790-976ab2c5ada5, requestedAmount=25000, totalAmount=132615.84, term=8, monthlyPayment=16576.98, rate=16, isInsuranceEnabled=true, isSalaryClient=true)
+2025-06-14 20:19:30 DEBUG [http-nio-8080-exec-5] r.d.c.s.i.CalcLoanOfferServiceImpl - Calculated list of loan offers [LoanOfferDto(statementId=c15ec84b-6d79-4a1d-8062-fa1c96433853, requestedAmount=25000, totalAmount=26911.12, term=8, monthlyPayment=3363.89, rate=20, isInsuranceEnabled=false, isSalaryClient=false), LoanOfferDto(statementId=aeeddd69-9fa9-47c5-96c4-d3d30f9e9030, requestedAmount=25000, totalAmount=26813.92, term=8, monthlyPayment=3351.74, rate=19, isInsuranceEnabled=false, isSalaryClient=true), LoanOfferDto(statementId=8ef15840-f4ec-4c41-b054-dc5ab3277ee6, requestedAmount=25000, totalAmount=133099.52, term=8, monthlyPayment=16637.44, rate=17, isInsuranceEnabled=true, isSalaryClient=false), LoanOfferDto(statementId=495d6bf8-9926-4e0a-8790-976ab2c5ada5, requestedAmount=25000, totalAmount=132615.84, term=8, monthlyPayment=16576.98, rate=16, isInsuranceEnabled=true, isSalaryClient=true)]
+2025-06-14 20:19:30 INFO  [http-nio-8080-exec-5] r.d.c.c.CalculatorController - Response for loan offers request <200 OK OK,[LoanOfferDto(statementId=c15ec84b-6d79-4a1d-8062-fa1c96433853, requestedAmount=25000, totalAmount=26911.12, term=8, monthlyPayment=3363.89, rate=20, isInsuranceEnabled=false, isSalaryClient=false), LoanOfferDto(statementId=aeeddd69-9fa9-47c5-96c4-d3d30f9e9030, requestedAmount=25000, totalAmount=26813.92, term=8, monthlyPayment=3351.74, rate=19, isInsuranceEnabled=false, isSalaryClient=true), LoanOfferDto(statementId=8ef15840-f4ec-4c41-b054-dc5ab3277ee6, requestedAmount=25000, totalAmount=133099.52, term=8, monthlyPayment=16637.44, rate=17, isInsuranceEnabled=true, isSalaryClient=false), LoanOfferDto(statementId=495d6bf8-9926-4e0a-8790-976ab2c5ada5, requestedAmount=25000, totalAmount=132615.84, term=8, monthlyPayment=16576.98, rate=16, isInsuranceEnabled=true, isSalaryClient=true)],[]>
+2025-06-14 20:19:38 INFO  [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-14 20:19:38 INFO  [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete

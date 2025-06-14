@@ -30,7 +30,9 @@ public class CalcCreditServiceImpl implements CalcCreditService {
     @Override
     public CreditDto calcCredit(ScoringDataDto scoringData) {
         log.debug("Calculating credit {}", scoringData);
-        return createCredit(scoringData);
+        CreditDto creditDto = createCredit(scoringData);
+        log.debug("Calculated credit {}", creditDto);
+        return creditDto;
     }
 
     private CreditDto createCredit(ScoringDataDto scoringData) {
@@ -47,9 +49,16 @@ public class CalcCreditServiceImpl implements CalcCreditService {
         userValidator.validate(scoringData, creditDto);
 
         BigDecimal resultRate = loanCalculator.adjustRate(creditDto.getRate(), creditDto.getIsInsuranceEnabled(), creditDto.getIsSalaryClient());
+        log.debug("Calculated rate: {}", resultRate);
+
         BigDecimal principal = loanCalculator.calculatePrincipal(creditDto.getAmount(), creditDto.getIsInsuranceEnabled());
+        log.debug("Calculated principal: {}", principal);
+
         BigDecimal monthlyPayment = loanCalculator.calculateAnnuityMonthlyPayment(principal, resultRate, creditDto.getTerm());
+        log.debug("Calculated monthly payment: {}", monthlyPayment);
+
         BigDecimal totalAmount = loanCalculator.calculateTotalAmount(monthlyPayment, creditDto.getTerm());
+        log.debug("Calculated totalAmount: {}", totalAmount);
 
         creditDto.setAmount(principal);
         creditDto.setMonthlyPayment(monthlyPayment);
@@ -63,6 +72,7 @@ public class CalcCreditServiceImpl implements CalcCreditService {
     }
 
     private List<PaymentScheduleElementDto> calculatePaymentSchedule(CreditDto creditDto) {
+        log.debug("Calculating payment schedule for credit: {}", creditDto);
         List<PaymentScheduleElementDto> paymentSchedule = new ArrayList<>();
         LocalDate startDate = LocalDate.now();
         BigDecimal remainingDebt = creditDto.getAmount();
@@ -78,48 +88,72 @@ public class CalcCreditServiceImpl implements CalcCreditService {
             debtPayment = calculateDebtPayment(totalPayment, interestPayment);
             remainingDebt = calculateRemainingDebt(remainingDebt, debtPayment);
 
+            log.debug("Month {}: interest={}, debt={}, remainingDebt={}",
+                    i,
+                    interestPayment.setScale(2, RoundingMode.HALF_UP),
+                    debtPayment.setScale(2, RoundingMode.HALF_UP),
+                    remainingDebt.setScale(2, RoundingMode.HALF_UP)
+            );
+
             if (i == term) {
                 totalPayment = totalPayment.add(remainingDebt);
+                log.debug("Total payment by element: {}", totalPayment);
                 remainingDebt = BigDecimal.valueOf(0);
             }
 
-            paymentSchedule.add(
-                    PaymentScheduleElementDto.builder()
-                            .number(i)
-                            .date(startDate)
-                            .totalPayment(totalPayment.setScale(2, RoundingMode.HALF_UP))
-                            .interestPayment(interestPayment.setScale(2, RoundingMode.HALF_UP))
-                            .debtPayment(debtPayment.setScale(2, RoundingMode.HALF_UP))
-                            .remainingDebt(remainingDebt.setScale(2, RoundingMode.HALF_UP))
-                            .build()
-            );
+            PaymentScheduleElementDto element = PaymentScheduleElementDto.builder()
+                    .number(i)
+                    .date(startDate)
+                    .totalPayment(totalPayment.setScale(2, RoundingMode.HALF_UP))
+                    .interestPayment(interestPayment.setScale(2, RoundingMode.HALF_UP))
+                    .debtPayment(debtPayment.setScale(2, RoundingMode.HALF_UP))
+                    .remainingDebt(remainingDebt.setScale(2, RoundingMode.HALF_UP))
+                    .build();
+
+            paymentSchedule.add(element);
+            log.debug("Added schedule element: {}", element);
         }
+        log.debug("Calculated payment schedule for credit: {}", paymentSchedule);
         return paymentSchedule;
     }
 
     private BigDecimal calculateInterestPayment(BigDecimal remainingDebt, BigDecimal rate) {
-        return remainingDebt.multiply(rate.divide(BigDecimal.valueOf(12 * 100), 7, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculating interest payment: remainingDebt={}, rate={}", remainingDebt, rate);
+        BigDecimal monthlyRate = rate.divide(BigDecimal.valueOf(12 * 100), 7, RoundingMode.HALF_UP);
+        BigDecimal interest = remainingDebt.multiply(monthlyRate).setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculated interest payment: interest={}", interest);
+        return interest;
     }
 
     private BigDecimal calculateDebtPayment(BigDecimal totalPayment, BigDecimal interestPayment) {
-        return totalPayment.subtract(interestPayment).setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculating debt payment: totalPayment={}, interestPayment={}", totalPayment, interestPayment);
+        BigDecimal debtPayment = totalPayment.subtract(interestPayment).setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculated debt payment: debtPayment={}", debtPayment);
+        return debtPayment;
     }
 
     private BigDecimal calculateRemainingDebt(BigDecimal remainingDebt, BigDecimal debtPayment) {
-        return remainingDebt.subtract(debtPayment).setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculating remaining debt: remainingDebt={}, debtPayment={}", remainingDebt, debtPayment);
+        BigDecimal newRemainingDebt = remainingDebt.subtract(debtPayment).setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculated remaining debt: remainingDebt={}", newRemainingDebt);
+        return remainingDebt;
     }
 
     private BigDecimal calculatePSK(BigDecimal totalAmount, BigDecimal amount, int term) {
+        log.debug("Calculating psk for amount and term: amount={}, term={}", amount, term);
         if (amount.compareTo(BigDecimal.ZERO) == 0 || term == 0) {
+            log.warn("Cannot calculate PSK: amount={} or term={} is zero", amount, term);
             return BigDecimal.ZERO;
         }
         BigDecimal overpayment = totalAmount.subtract(amount);
         BigDecimal years = BigDecimal.valueOf(term)
                 .divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
-        return overpayment
+        overpayment = overpayment
                 .divide(amount, 10, RoundingMode.HALF_UP)
                 .divide(years, 10, RoundingMode.HALF_UP)
                 .multiply(BigDecimal.valueOf(100))
                 .setScale(2, RoundingMode.HALF_UP);
+        log.debug("Calculated psk: {}", overpayment);
+        return overpayment;
     }
 }
