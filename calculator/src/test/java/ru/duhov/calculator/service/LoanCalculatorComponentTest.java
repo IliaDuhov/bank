@@ -43,6 +43,15 @@ class LoanCalculatorComponentTest {
     }
 
     @Test
+    void adjustRateNotEnabeled(){
+        BigDecimal rate = BigDecimal.valueOf(20);
+        boolean isInsuranceEnabled = false;
+        boolean isSalaryClient = false;
+        BigDecimal adjustedRate = loanCalculator.adjustRate(rate, isInsuranceEnabled, isSalaryClient);
+        assertEquals(rate, adjustedRate);
+    }
+
+    @Test
     void calculatePrincipalTest() {
         BigDecimal amount = BigDecimal.valueOf(100000);
         boolean isInsuranceEnabled = true;

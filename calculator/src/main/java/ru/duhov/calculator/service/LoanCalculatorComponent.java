@@ -22,13 +22,13 @@ public class LoanCalculatorComponent {
     public BigDecimal calculateAnnuityMonthlyPayment(BigDecimal loanAmount, BigDecimal rate, int term) {
         log.debug("Calculating annuity monthly payment: loanAmount={}, rate={}, term={}",
                 loanAmount, rate, term);
-        BigDecimal monthlyRate = rate.divide(new BigDecimal(12 * 100), 10, RoundingMode.HALF_UP);
+        BigDecimal monthlyRate = rate.divide(new BigDecimal(12 * 100), 10, RoundingMode.HALF_EVEN);
         BigDecimal onePlusRatePowTerm = monthlyRate.add(BigDecimal.ONE).pow(term);
         BigDecimal annuityCoefficient = monthlyRate.divide(onePlusRatePowTerm.subtract(BigDecimal.ONE),
-                10, RoundingMode.HALF_UP).add(monthlyRate);
+                10, RoundingMode.HALF_EVEN).add(monthlyRate);
 
         BigDecimal monthlyPayment = loanAmount.multiply(annuityCoefficient);
-        monthlyPayment = monthlyPayment.setScale(2, RoundingMode.HALF_UP);
+        monthlyPayment = monthlyPayment.setScale(2, RoundingMode.HALF_EVEN);
         log.debug("Calculated monthly payment: {}", monthlyPayment);
         return monthlyPayment;
     }

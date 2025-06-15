@@ -67,8 +67,6 @@ public class CalcCreditServiceImpl implements CalcCreditService {
         creditDto.setPaymentSchedule(calculatePaymentSchedule(creditDto));
         log.debug("Credit dto created {}", creditDto);
         return creditDto;
-
-
     }
 
     private List<PaymentScheduleElementDto> calculatePaymentSchedule(CreditDto creditDto) {
@@ -90,9 +88,9 @@ public class CalcCreditServiceImpl implements CalcCreditService {
 
             log.debug("Month {}: interest={}, debt={}, remainingDebt={}",
                     i,
-                    interestPayment.setScale(2, RoundingMode.HALF_UP),
-                    debtPayment.setScale(2, RoundingMode.HALF_UP),
-                    remainingDebt.setScale(2, RoundingMode.HALF_UP)
+                    interestPayment.setScale(2, RoundingMode.HALF_EVEN),
+                    debtPayment.setScale(2, RoundingMode.HALF_EVEN),
+                    remainingDebt.setScale(2, RoundingMode.HALF_EVEN)
             );
 
             if (i == term) {
@@ -104,10 +102,10 @@ public class CalcCreditServiceImpl implements CalcCreditService {
             PaymentScheduleElementDto element = PaymentScheduleElementDto.builder()
                     .number(i)
                     .date(startDate)
-                    .totalPayment(totalPayment.setScale(2, RoundingMode.HALF_UP))
-                    .interestPayment(interestPayment.setScale(2, RoundingMode.HALF_UP))
-                    .debtPayment(debtPayment.setScale(2, RoundingMode.HALF_UP))
-                    .remainingDebt(remainingDebt.setScale(2, RoundingMode.HALF_UP))
+                    .totalPayment(totalPayment.setScale(2, RoundingMode.HALF_EVEN))
+                    .interestPayment(interestPayment.setScale(2, RoundingMode.HALF_EVEN))
+                    .debtPayment(debtPayment.setScale(2, RoundingMode.HALF_EVEN))
+                    .remainingDebt(remainingDebt.setScale(2, RoundingMode.HALF_EVEN))
                     .build();
 
             paymentSchedule.add(element);
@@ -119,41 +117,65 @@ public class CalcCreditServiceImpl implements CalcCreditService {
 
     private BigDecimal calculateInterestPayment(BigDecimal remainingDebt, BigDecimal rate) {
         log.debug("Calculating interest payment: remainingDebt={}, rate={}", remainingDebt, rate);
-        BigDecimal monthlyRate = rate.divide(BigDecimal.valueOf(12 * 100), 7, RoundingMode.HALF_UP);
-        BigDecimal interest = remainingDebt.multiply(monthlyRate).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal monthlyRate = rate.divide(BigDecimal.valueOf(12 * 100), 7, RoundingMode.HALF_EVEN);
+        BigDecimal interest = remainingDebt.multiply(monthlyRate).setScale(2, RoundingMode.HALF_EVEN);
         log.debug("Calculated interest payment: interest={}", interest);
         return interest;
     }
 
     private BigDecimal calculateDebtPayment(BigDecimal totalPayment, BigDecimal interestPayment) {
         log.debug("Calculating debt payment: totalPayment={}, interestPayment={}", totalPayment, interestPayment);
-        BigDecimal debtPayment = totalPayment.subtract(interestPayment).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal debtPayment = totalPayment.subtract(interestPayment).setScale(2, RoundingMode.HALF_EVEN);
         log.debug("Calculated debt payment: debtPayment={}", debtPayment);
         return debtPayment;
     }
 
     private BigDecimal calculateRemainingDebt(BigDecimal remainingDebt, BigDecimal debtPayment) {
         log.debug("Calculating remaining debt: remainingDebt={}, debtPayment={}", remainingDebt, debtPayment);
-        BigDecimal newRemainingDebt = remainingDebt.subtract(debtPayment).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal newRemainingDebt = remainingDebt.subtract(debtPayment).setScale(2, RoundingMode.HALF_EVEN);
         log.debug("Calculated remaining debt: remainingDebt={}", newRemainingDebt);
         return remainingDebt;
     }
 
-    private BigDecimal calculatePSK(BigDecimal totalAmount, BigDecimal amount, int term) {
-        log.debug("Calculating psk for amount and term: amount={}, term={}", amount, term);
-        if (amount.compareTo(BigDecimal.ZERO) == 0 || term == 0) {
-            log.warn("Cannot calculate PSK: amount={} or term={} is zero", amount, term);
+    private BigDecimal calculatePSK(BigDecimal principal, BigDecimal monthlyPayment, int termMonths) {
+        log.debug("Calculating PSK by: principal={}, monthlyPayment={}, termMonths={}", principal, monthlyPayment, termMonths);
+        if (principal == null || monthlyPayment == null ||
+                principal.compareTo(BigDecimal.ZERO) <= 0 || termMonths <= 0) {
+            log.warn("Invalid input for PSK calculation");
             return BigDecimal.ZERO;
         }
-        BigDecimal overpayment = totalAmount.subtract(amount);
-        BigDecimal years = BigDecimal.valueOf(term)
-                .divide(BigDecimal.valueOf(12), 10, RoundingMode.HALF_UP);
-        overpayment = overpayment
-                .divide(amount, 10, RoundingMode.HALF_UP)
-                .divide(years, 10, RoundingMode.HALF_UP)
-                .multiply(BigDecimal.valueOf(100))
-                .setScale(2, RoundingMode.HALF_UP);
-        log.debug("Calculated psk: {}", overpayment);
-        return overpayment;
+        double low = 0.0;
+        double high = 1.0;
+        double eps = 1e-10;
+        double guessRate = 0.0;
+
+        int maxIterations = 100;
+        for (int i = 0; i < maxIterations; i++) {
+            guessRate = (low + high) / 2.0;
+
+            double npv = -principal.doubleValue();
+            for (int m = 1; m <= termMonths; m++) {
+                npv += monthlyPayment.doubleValue() / Math.pow(1 + guessRate, m);
+            }
+            if (Math.abs(npv) < eps) {
+                break;
+            }
+            if (npv > 0) {
+                low = guessRate;
+            } else {
+                high = guessRate;
+            }
+        }
+        double annualRate = (Math.pow(1 + guessRate, 12) - 1) * 100;
+        BigDecimal psk = BigDecimal.valueOf(annualRate).setScale(2, RoundingMode.HALF_EVEN);
+
+        log.debug("Calculated PSK: {}%", psk);
+        return psk;
     }
+
+
+    public void setBaseRate(BigDecimal baseRate){
+        this.BASE_RATE = baseRate;
+    }
+
 }

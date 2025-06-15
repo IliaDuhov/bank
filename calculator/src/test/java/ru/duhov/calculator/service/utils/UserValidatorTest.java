@@ -191,6 +191,39 @@ class UserValidatorTest {
     }
 
     @Test
+    void validateFemaleGenderAndLessThirty() {
+        scoringData.setGender(Gender.FEMALE);
+        scoringData.setBirthdate(LocalDate.now().minusYears(30));
+        userValidator.validate(scoringData, creditDto);
+        assertEquals(BigDecimal.valueOf(17), creditDto.getRate());
+    }
+
+    @Test
+    void validateFemaleGenderAndAgeMoreSixty() {
+        scoringData.setGender(Gender.FEMALE);
+        scoringData.setBirthdate(LocalDate.now().minusYears(65));
+        userValidator.validate(scoringData, creditDto);
+        assertEquals(BigDecimal.valueOf(17), creditDto.getRate());
+    }
+
+    @Test
+    void validateMaleGenderAndAgeLessThirty() {
+        scoringData.setGender(Gender.MALE);
+        scoringData.setBirthdate(LocalDate.now().minusYears(25));
+        userValidator.validate(scoringData, creditDto);
+        assertEquals(BigDecimal.valueOf(17), creditDto.getRate());
+    }
+
+    @Test
+    void validateMaleGenderAndAgeMoreFiftyFive() {
+        scoringData.setGender(Gender.MALE);
+        scoringData.setBirthdate(LocalDate.now().minusYears(60));
+        userValidator.validate(scoringData, creditDto);
+        assertEquals(BigDecimal.valueOf(17), creditDto.getRate());
+    }
+
+
+    @Test
     void validateWorkExperienceTotal(){
         employment.setWorkExperienceTotal(17);
         Exception exception = assertThrows(CreditRefusedException.class, () -> userValidator.validate(scoringData, creditDto));
