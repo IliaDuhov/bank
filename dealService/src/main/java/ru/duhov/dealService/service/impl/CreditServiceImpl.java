@@ -18,7 +18,7 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit createCredit(CreditDto creditDto) {
-        log.info("Creating new credit with data: {}", creditDto);
+        log.debug("Creating new credit with data: {}", creditDto);
         Credit credit = Credit.builder()
                 .creditStatus(CreditStatus.CALCULATED)
                 .amount(creditDto.getAmount())
@@ -26,13 +26,13 @@ public class CreditServiceImpl implements CreditService {
                 .insuranceEnabled(creditDto.getIsInsuranceEnabled())
                 .salaryClient(creditDto.getIsSalaryClient())
                 .monthlyPayment(creditDto.getMonthlyPayment())
-                .paymentSchedule(creditDto.getPaymentSchedule().toString())
+                .paymentSchedule(creditDto.getPaymentSchedule())
                 .rate(creditDto.getRate())
                 .term(creditDto.getTerm())
                 .build();
 
         credit = creditRepository.save(credit);
-        log.info("Credit created: {}", credit);
+        log.debug("Credit created: {}", credit);
         return credit;
     }
 }

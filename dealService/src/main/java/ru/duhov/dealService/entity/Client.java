@@ -27,44 +27,43 @@ import java.util.UUID;
 public class Client {
 
     @Id
-    @SequenceGenerator(name = "client_generator", sequenceName = "client_sequence", allocationSize = 1)
-    @GeneratedValue(generator = "client_generator", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "client_id")
     private UUID id;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "middle_name")
     private String middleName;
 
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "marital_status", nullable = false)
+    @Column(name = "marital_status")
     private MaritalStatus maritalStatus;
 
-    @Column(name = "dependent_amount", nullable = false)
+    @Column(name = "dependent_amount")
     private Integer dependentAmount;
 
-    @Column(name = "passport_id", nullable = false)
+    @Column(name = "passport_id")
     private UUID passportId;
 
-    @Column(name = "employment_id", nullable = false)
+    @Column(name = "employment_id")
     private UUID employmentId;
 
-    @Column(name = "account_number", nullable = false)
+    @Column(name = "account_number")
     private String accountNumber;
 
     @JdbcTypeCode(SqlTypes.JSON)

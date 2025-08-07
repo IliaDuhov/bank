@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
 import org.hibernate.type.SqlTypes;
 import ru.duhov.dealService.dto.LoanOfferDto;
 import ru.duhov.dealService.dto.enums.ApplicationStatus;
@@ -24,25 +26,20 @@ import java.util.UUID;
 public class Statement {
 
     @Id
-    @SequenceGenerator(name = "statement_generator", sequenceName = "statement_sequence", allocationSize = 1)
-    @GeneratedValue(generator = "statement_generator", strategy = GenerationType.SEQUENCE)
-    private UUID id;
-
-    @Column(name = "client_id_uuid", nullable = false)
-    private UUID clientId;
-
-    @Column(name = "credit_id_uuid")
-    private UUID creditId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "statement_id", columnDefinition = "uuid", nullable = false, updatable = false)
+    private UUID statementId;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private ApplicationStatus status;
 
-    @Column(name = "creation_date", nullable = false)
+    @Column(name = "creation_date")
     private OffsetDateTime creationDate;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "applied_offer", columnDefinition = "jsonb")
-    private String appliedOffer;
+    private LoanOfferDto appliedOffer;
 
     @Column(name = "sign_date")
     private OffsetDateTime signDate;
@@ -50,19 +47,16 @@ public class Statement {
     @Column(name = "ses_code")
     private String sesCode;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "status_history", columnDefinition = "jsonb")
-    private String statusHistory;
+    private List<StatusHistory> statusHistory;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "client_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "credit_id", referencedColumnName = "credit_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "credit_id", nullable = false)
     private Credit credit;
-
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private LoanOfferDto loanOffer;
 
 }

@@ -1,17 +1,18 @@
 package ru.duhov.dealService.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-import ru.duhov.dealService.dto.CreditDto;
-import ru.duhov.dealService.dto.LoanOfferDto;
-import ru.duhov.dealService.dto.LoanStatementRequestDto;
-import ru.duhov.dealService.dto.ScoringDataDto;
+import ru.duhov.dealService.dto.*;
+import ru.duhov.dealService.entity.Client;
+import ru.duhov.dealService.entity.Statement;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class RestClientServiceImpl implements RestClientService{
 
     private final RestClient restClient;
@@ -33,7 +34,7 @@ public class RestClientServiceImpl implements RestClientService{
     }
 
     @Override
-    public CreditDto calculate(ScoringDataDto request) {
+    public CreditDto calculateCredit(ScoringDataDto request) {
         return restClient.post()
                 .uri("/calc")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -41,4 +42,5 @@ public class RestClientServiceImpl implements RestClientService{
                 .retrieve()
                 .body(CreditDto.class);
     }
+
 }

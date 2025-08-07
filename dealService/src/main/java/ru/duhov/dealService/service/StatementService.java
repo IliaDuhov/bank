@@ -12,6 +12,4 @@ public interface StatementService {
     public Statement getStatementById(UUID statementId);
 
     public void updateStatement(Statement statement, LoanOfferDto request);
-
-    public void updateStatusAndStatusHistory(Statement statement);
 }

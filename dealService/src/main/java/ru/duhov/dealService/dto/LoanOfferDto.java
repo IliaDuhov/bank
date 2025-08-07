@@ -18,7 +18,7 @@ import java.util.UUID;
 public class LoanOfferDto {
 
     @NotNull
-    @Schema(description = "Statement identificator")
+    @Schema(description = "Statement identification")
     private UUID statementId;
 
     @NotNull

@@ -5,9 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import ru.duhov.dealService.dto.PaymentScheduleElementDto;
 import ru.duhov.dealService.dto.enums.CreditStatus;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,8 +23,7 @@ import java.util.UUID;
 public class Credit {
 
     @Id
-    @SequenceGenerator(name = "credit_generator", sequenceName = "credit_sequence", allocationSize = 1)
-    @GeneratedValue(generator = "credit_generator", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "credit_id")
     private UUID id;
 
@@ -39,8 +42,9 @@ public class Credit {
     @Column(name = "psk", nullable = false)
     private BigDecimal psk;
 
-    @Column(name = "payment_schedule", columnDefinition = "jsonb")
-    private String paymentSchedule;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private List<PaymentScheduleElementDto> paymentSchedule;
 
     @Column(name = "insurance_enabled", nullable = false)
     private Boolean insuranceEnabled;

@@ -11,5 +11,5 @@ public interface RestClientService {
 
     List<LoanOfferDto> getLoanOffers(LoanStatementRequestDto request);
 
-    CreditDto calculate(ScoringDataDto request);
+    CreditDto calculateCredit(ScoringDataDto request);
 }
