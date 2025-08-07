@@ -4,30 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f3ec4d17-c91f-47b5-9511-e01d115f99a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/EmploymentDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/FinishRegistrationRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/LoanOfferDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/LoanStatementRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/StatementStatusHistoryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/ApplicationStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/ChangeType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/CreditStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/EmploymentStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/Gender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/MaritalStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/enums/Position.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Credit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Statement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f3ec4d17-c91f-47b5-9511-e01d115f99a4" name="Changes" comment="added models, dto's">
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/controller/DealController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/CreditDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/PaymentScheduleElementDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/ScoringDataDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/jsonb/Employment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/jsonb/Passport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/jsonb/StatusHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/repository/ClientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/repository/CreditRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/repository/StatementRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/ClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/CreditService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/DealService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/StatementService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/ClientServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/CreditServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/DealServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/StatementServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/swagger/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/utils/RestClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/utils/RestClientServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calculator/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/calculator/logs/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/EmploymentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/EmploymentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/StatementStatusHistoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/StatementStatusHistoryDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Credit.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Credit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Statement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +42,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,6 +56,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;IliaDuhov&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/IliaDuhov/bank.git&quot;,
+    &quot;accountId&quot;: &quot;2458a379-d98e-4675-948d-f5e6f4a91a37&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -60,7 +78,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.CalculatorApplication.executor": "Coverage",
+    "Application.CalculatorApplication.executor": "Run",
     "Application.DealServiceApplication.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -74,6 +92,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\PC\Desktop\gitRepos\bank\dealService\src\main\java\ru\duhov\dealService\dto\enums" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.duhov.dealService.dto" />
+      <recent name="ru.duhov.dealService.swagger" />
     </key>
   </component>
   <component name="RunManager" selected="Application.DealServiceApplication">
@@ -118,6 +140,15 @@
       <option name="presentableId" value="Default" />
       <updated>1754495560354</updated>
     </task>
+    <task id="LOCAL-00001" summary="added models, dto's">
+      <option name="closed" value="true" />
+      <created>1754507962178</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754507962178</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,6 +161,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added models, dto's" />
+    <option name="LAST_COMMIT_MESSAGE" value="added models, dto's" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/bank$CalculatorApplication.ic" NAME="CalculatorApplication Coverage Results" MODIFIED="1754500733954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

@@ -8,7 +8,6 @@ import ru.duhov.dealService.dto.enums.ApplicationStatus;
 import ru.duhov.dealService.dto.enums.ChangeType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +17,7 @@ public class StatementStatusHistoryDto {
 
     private ApplicationStatus status;
 
-    private LocalDateTime time;
+    private LocalDate time;
 
     private ChangeType changeType;
 }

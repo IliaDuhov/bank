@@ -21,6 +21,7 @@ public class Credit {
     @Id
     @SequenceGenerator(name = "credit_generator", sequenceName = "credit_sequence", allocationSize = 1)
     @GeneratedValue(generator = "credit_generator", strategy = GenerationType.SEQUENCE)
+    @Column(name = "credit_id")
     private UUID id;
 
     @Column(name = "amount", nullable = false)
@@ -39,7 +40,7 @@ public class Credit {
     private BigDecimal psk;
 
     @Column(name = "payment_schedule", columnDefinition = "jsonb")
-    private String paymentSchedule;   // хранится как jsonb
+    private String paymentSchedule;
 
     @Column(name = "insurance_enabled", nullable = false)
     private Boolean insuranceEnabled;
