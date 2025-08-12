@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85aa389f-eb62-42b7-9f3b-0942e7cc08e4" name="Changes" comment="init deal service" />
+    <list default="true" id="f3ec4d17-c91f-47b5-9511-e01d115f99a4" name="Changes" comment="added swagger, restClient, logging">
+      <change afterPath="$PROJECT_DIR$/dealService/src/test/java/ru/duhov/dealService/service/impl/ClientServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/test/java/ru/duhov/dealService/service/impl/CreditServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/test/java/ru/duhov/dealService/service/impl/DealServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/test/java/ru/duhov/dealService/service/impl/StatementServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dealService/src/test/java/ru/duhov/dealService/utils/RestClientServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/controller/DealController.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/controller/DealController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/LoanOfferDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/LoanOfferDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/LoanStatementRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/dto/LoanStatementRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/DealServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/DealServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/StatementServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/service/impl/StatementServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/utils/RestClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/dealService/src/main/java/ru/duhov/dealService/utils/RestClientServiceImpl.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,14 +28,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/deal/createDealService" />
+        <entry key="$PROJECT_DIR$" value="feature/calculator/createCalcService" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,13 +52,13 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/IliaDuhov/bank.git&quot;,
-    &quot;accountId&quot;: &quot;ced6ba6c-de23-4b5c-9a8c-bf546f17a20a&quot;
+    &quot;accountId&quot;: &quot;2458a379-d98e-4675-948d-f5e6f4a91a37&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2yRh5w5T8CVocGzrjnz3qCAyLHw" />
+  <component name="ProjectId" id="30v6Ax8LWVQz7qtpRLA6uOGtc1T" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -48,96 +66,210 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CalculatorApplication.executor": "Run",
-    "Application.DealApplication.executor": "Run",
+    "Application.DealServiceApplication.executor": "Run",
+    "JUnit.ClientServiceImplTest.executor": "Coverage",
+    "JUnit.CreditServiceImplTest.executor": "Coverage",
+    "JUnit.DealServiceImplTest.calculateLoan_shouldCallCreditService.executor": "Run",
+    "JUnit.DealServiceImplTest.executor": "Coverage",
+    "JUnit.DealServiceImplTest.getLoanOffers_shouldReturnList.executor": "Run",
+    "JUnit.DealServiceImplTest.selectLoanOffer_shouldUpdateStatement.executor": "Run",
+    "JUnit.RestClientServiceImplTest.executor": "Run",
+    "JUnit.StatementServiceImplTest.createStatement_shouldSaveClientAndStatement.executor": "Run",
+    "JUnit.StatementServiceImplTest.executor": "Coverage",
+    "JUnit.StatementServiceImplTest.getStatementById.executor": "Run",
+    "JUnit.StatementServiceImplTest.getStatementById_whenFound_shouldReturnStatement.executor": "Coverage",
+    "JUnit.StatementServiceImplTest.updateStatement.executor": "Run",
+    "JUnit.ru.duhov.dealService in dealService.executor": "Coverage",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "feature/deal/createDealService",
-    "last_opened_file_path": "C:/Users/adm/Desktop/gitRepos/bank",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "last_opened_file_path": "C:/Users/PC/Desktop/gitRepos/bank/dealService/src/main/resources",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.CalculatorApplication">
-    <configuration name="CalculatorApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.duhov.calculator.CalculatorApplication" />
-      <module name="calculator" />
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\Desktop\gitRepos\bank\dealService\src\main\resources" />
+      <recent name="C:\Users\PC\Desktop\gitRepos\bank\dealService\src\main\java\ru\duhov\dealService\dto\enums" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ru.duhov.dealService.service.impl" />
+      <recent name="ru.duhov.dealService.utils" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.duhov.dealService.dto" />
+      <recent name="ru.duhov.dealService.swagger" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ru.duhov.dealService in dealService">
+    <configuration name="DealServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dealService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ru.duhov.calculator.*" />
+          <option name="PATTERN" value="ru.duhov.dealService.service.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
+      <option name="PACKAGE_NAME" value="ru.duhov.dealService.service.impl" />
+      <option name="MAIN_CLASS_NAME" value="ru.duhov.dealService.service.impl.DealServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DealApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.duhov.deal.DealApplication" />
-      <module name="deal" />
+    <configuration name="DealServiceImplTest.calculateLoan_shouldCallCreditService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dealService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ru.duhov.deal.*" />
+          <option name="PATTERN" value="ru.duhov.dealService.service.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
+      <option name="PACKAGE_NAME" value="ru.duhov.dealService.service.impl" />
+      <option name="MAIN_CLASS_NAME" value="ru.duhov.dealService.service.impl.DealServiceImplTest" />
+      <option name="METHOD_NAME" value="calculateLoan_shouldCallCreditService" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.CalculatorApplication" />
-      <item itemvalue="Application.DealApplication" />
-    </list>
+    <configuration name="DealServiceImplTest.getLoanOffers_shouldReturnList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dealService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.duhov.dealService.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.duhov.dealService.service.impl" />
+      <option name="MAIN_CLASS_NAME" value="ru.duhov.dealService.service.impl.DealServiceImplTest" />
+      <option name="METHOD_NAME" value="getLoanOffers_shouldReturnList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DealServiceImplTest.selectLoanOffer_shouldUpdateStatement" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dealService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.duhov.dealService.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.duhov.dealService.service.impl" />
+      <option name="MAIN_CLASS_NAME" value="ru.duhov.dealService.service.impl.DealServiceImplTest" />
+      <option name="METHOD_NAME" value="selectLoanOffer_shouldUpdateStatement" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ru.duhov.dealService in dealService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dealService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.duhov.dealService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.duhov.dealService" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CalculatorApplication" />
-        <item itemvalue="Application.DealApplication" />
+        <item itemvalue="JUnit.ru.duhov.dealService in dealService" />
+        <item itemvalue="JUnit.DealServiceImplTest.calculateLoan_shouldCallCreditService" />
+        <item itemvalue="JUnit.DealServiceImplTest.selectLoanOffer_shouldUpdateStatement" />
+        <item itemvalue="JUnit.DealServiceImplTest.getLoanOffers_shouldReturnList" />
+        <item itemvalue="JUnit.DealServiceImplTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="85aa389f-eb62-42b7-9f3b-0942e7cc08e4" name="Changes" comment="" />
-      <created>1749803114051</created>
+      <changelist id="f3ec4d17-c91f-47b5-9511-e01d115f99a4" name="Changes" comment="" />
+      <created>1754495560354</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1749803114051</updated>
+      <updated>1754495560354</updated>
     </task>
-    <task id="LOCAL-00001" summary="init deal service">
+    <task id="LOCAL-00001" summary="added models, dto's">
       <option name="closed" value="true" />
-      <created>1749806247974</created>
+      <created>1754507962178</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1749806247974</updated>
+      <updated>1754507962178</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="simole services, added swagger">
+      <option name="closed" value="true" />
+      <created>1754566729389</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754566729389</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added swagger, restClient, logging">
+      <option name="closed" value="true" />
+      <created>1754580003761</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1754580003761</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init deal service" />
-    <option name="LAST_COMMIT_MESSAGE" value="init deal service" />
+    <MESSAGE value="added models, dto's" />
+    <MESSAGE value="simole services, added swagger" />
+    <MESSAGE value="added swagger, restClient, logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="added swagger, restClient, logging" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bank$ru_duhov_dealService_in_dealService.ic" NAME="ru.duhov.dealService in dealService Coverage Results" MODIFIED="1754917051381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.dealService.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/bank$StatementServiceImplTest_getStatementById_whenFound_shouldReturnStatement.ic" NAME="StatementServiceImplTest.getStatementById_whenFound_shouldReturnStatement Coverage Results" MODIFIED="1754916229635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.dealService.service.impl.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/bank$CreditServiceImplTest.ic" NAME="CreditServiceImplTest Coverage Results" MODIFIED="1754912158434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.dealService.service.impl.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/bank$StatementServiceImplTest.ic" NAME="StatementServiceImplTest Coverage Results" MODIFIED="1754912148562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.dealService.service.impl.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/bank$DealServiceImplTest.ic" NAME="DealServiceImplTest Coverage Results" MODIFIED="1754916740774" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.dealService.service.impl.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/bank$ClientServiceImplTest.ic" NAME="ClientServiceImplTest Coverage Results" MODIFIED="1754912168752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.dealService.service.impl.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/bank$CalculatorApplication.ic" NAME="CalculatorApplication Coverage Results" MODIFIED="1754500733954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>ru.duhov.calculator.*</FILTER>
+    </SUITE>
   </component>
 </project>

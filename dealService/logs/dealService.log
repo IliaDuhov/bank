@@ -1,0 +1,11 @@
+2025-08-12 19:55:32.092 INFO  [main] r.d.d.DealServiceApplicationTests - Starting DealServiceApplicationTests using Java 21.0.8 with PID 10376 (started by PC in C:\Users\PC\Desktop\gitRepos\bank\dealService)
+2025-08-12 19:55:32.092 DEBUG [main] r.d.d.DealServiceApplicationTests - Running with Spring Boot v3.4.4, Spring v6.2.5
+2025-08-12 19:55:32.092 INFO  [main] r.d.d.DealServiceApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2025-08-12 19:55:33.194 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-12 19:55:33.335 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2eb73a42
+2025-08-12 19:55:33.335 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-12 19:55:33.367 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-12 19:55:34.902 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-12 19:55:35.324 INFO  [main] r.d.d.DealServiceApplicationTests - Started DealServiceApplicationTests in 3.517 seconds (process running for 5.422)
+2025-08-12 19:55:35.362 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-12 19:55:35.367 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
