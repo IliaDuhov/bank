@@ -34,7 +34,7 @@ public class DealController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoanOfferDto.class))),
             @ApiResponse(responseCode = "400", description = "Incorrect request, validation exception",
                     content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Sever error", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "500", description = "Server error", content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/statement")
     public ResponseEntity<List<LoanOfferDto>> dealStatementPost(@RequestBody LoanStatementRequestDto request) {
@@ -45,10 +45,10 @@ public class DealController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Select loan offer",
+            @ApiResponse(responseCode = "200", description = "Select deal offer",
                     content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Incorrect scoring data", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Error while calculating credit", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "400", description = "Incorrect request data", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "500", description = "Error while selecting credit", content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/offer/select")
     public ResponseEntity<Void> dealOfferSelectPost(@RequestBody LoanOfferDto request) {
@@ -59,9 +59,9 @@ public class DealController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Calculate loan by id",
+            @ApiResponse(responseCode = "200", description = "Calculate statement by id",
                     content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Incorrect scoring data", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "Incorrect data", content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "500", description = "Error while calculating credit", content = @Content(mediaType = "application/json"))
     })
     @PostMapping("/calculate/{statementId}")

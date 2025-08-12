@@ -2,7 +2,9 @@ package ru.duhov.dealService.entity;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import com.vladmihalcea.hibernate.type.json.JsonType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -55,6 +57,8 @@ public class Client {
     private MaritalStatus maritalStatus;
 
     @Column(name = "dependent_amount")
+    @DecimalMin(value = "20000")
+    @Schema(description = "Requested amount", example = "25000")
     private Integer dependentAmount;
 
     @Column(name = "passport_id")

@@ -17,7 +17,6 @@ import ru.duhov.dealService.service.StatementService;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -58,11 +57,11 @@ public class StatementServiceImpl implements StatementService {
         statement.setStatus(statusHistoryJsonb.getStatus());
         statement.setAppliedOffer(request);
         statementRepository.save(statement);
-        log.debug("Statement updated.");
+        log.debug("Statement updated: {}", statement);
     }
 
     private StatusHistory createStatusHistory(ApplicationStatus applicationStatus, ChangeType changeType) {
-        log.info("Creating new status history entry: status = {}, changeType = {}", applicationStatus, changeType);
+        log.debug("Creating new status history entry: status = {}, changeType = {}", applicationStatus, changeType);
         return StatusHistory.builder()
                 .status(applicationStatus)
                 .changeType(changeType)

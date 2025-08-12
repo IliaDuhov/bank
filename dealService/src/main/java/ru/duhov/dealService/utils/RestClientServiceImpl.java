@@ -23,6 +23,10 @@ public class RestClientServiceImpl implements RestClientService{
                 .build();
     }
 
+    public RestClientServiceImpl(RestClient clientService){
+        this.restClient = clientService;
+    }
+
     @Override
     public List<LoanOfferDto> getLoanOffers(LoanStatementRequestDto request) {
         return restClient.post()

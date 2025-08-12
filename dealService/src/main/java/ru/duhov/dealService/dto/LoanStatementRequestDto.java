@@ -3,6 +3,7 @@ package ru.duhov.dealService.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Presentation of loan offer request")
+@Builder
 public class LoanStatementRequestDto {
 
     @NotNull

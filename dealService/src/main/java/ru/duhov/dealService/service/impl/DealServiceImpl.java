@@ -30,7 +30,9 @@ public class DealServiceImpl implements DealService {
         log.debug("Get loan offers from request {}", request);
         Client client = clientService.createClient(request);
         Statement statement = statementService.createStatement(client);
-        return restClientService.getLoanOffers(request);
+        List<LoanOfferDto> loanOffers = restClientService.getLoanOffers(request);
+        log.debug("Calculated loan offers: {}", loanOffers);
+        return loanOffers;
     }
 
     @Override
